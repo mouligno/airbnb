@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151019141510) do
+ActiveRecord::Schema.define(version: 20151019151602) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "booking_requests", force: :cascade do |t|
+    t.integer  "flat_id"
+    t.integer  "requester_id"
+    t.text     "description"
+    t.string   "status"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "booking_requests", ["flat_id"], name: "index_booking_requests_on_flat_id", using: :btree
+  add_index "booking_requests", ["requester_id"], name: "index_booking_requests_on_requester_id", using: :btree
 
   create_table "flats", force: :cascade do |t|
     t.integer  "owner_id"
@@ -70,6 +82,8 @@ ActiveRecord::Schema.define(version: 20151019141510) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "booking_requests", "flats"
+  add_foreign_key "booking_requests", "users", column: "requester_id"
   add_foreign_key "flats", "users", column: "owner_id"
   add_foreign_key "profiles", "users"
 end

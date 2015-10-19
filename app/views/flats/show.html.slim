@@ -18,3 +18,6 @@ p = @flat.price
 
 - @flat.flat_pictures.each do |picture|
   = image_tag(picture.small.url)
+
+hr
+= link_to 'Booking request', new_flat_booking_request_path(@flat)

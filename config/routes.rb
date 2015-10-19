@@ -5,7 +5,12 @@ Rails.application.routes.draw do
 
   namespace :account do
     resource :profile, only: %i(show edit update)
+    resources :booking_requests, only: %i(index)
+    resources :travels, only: %i(index)
   end
 
-  resources :flats, only: %i(index show new create)
+  resources :flats, only: %i(index show new create) do
+    resources :booking_requests, only: %i(new create)
+  end
+
 end

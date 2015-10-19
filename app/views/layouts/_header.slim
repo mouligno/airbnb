@@ -3,9 +3,14 @@
   '-
   => link_to 'My profile', account_profile_path
   '-
-  => link_to 'Sign out', destroy_user_session_path, method: :delete
+  => link_to 'My travels', account_travels_path
   '-
   => link_to 'Rent your flat', new_flat_path
+  '-
+  => link_to 'My booking requests', account_booking_requests_path
+  '-
+  => link_to 'Sign out', destroy_user_session_path, method: :delete
+
 - else
   => link_to 'Sign in', new_user_session_path
   '-
