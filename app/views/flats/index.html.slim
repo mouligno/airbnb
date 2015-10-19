@@ -1,0 +1,11 @@
+h1 List of flats
+
+- @flats.each do |flat|
+  .col-md-4
+    = link_to flat_path(flat)
+      - if flat.flat_pictures.any?
+        = image_tag(flat.flat_pictures.first.small.url, class: 'img-responsive')
+      - else
+        = image_tag('placeholder.jpg', class: 'img-responsive')
+      p = flat.title
+      p = flat.price

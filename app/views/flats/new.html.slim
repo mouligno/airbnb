@@ -1,0 +1,21 @@
+h1 New flat
+
+= simple_form_for @flat do |form|
+  = form.input :title
+  = form.input :address_line_1
+  = form.input :address_line_2
+  = form.input :zip_code
+  = form.input :city
+  = form.input :country
+  = form.input :rooms_number
+  = form.input :bed_number
+  = form.input :bathroom_number
+  = form.input :people_number
+  = form.input :smoker
+  = form.input :television
+  = form.input :internet
+  = form.input :kind, collection: ["Shared room", "Private room", "Full flat"]
+  = form.input :price
+  = form.file_field :flat_pictures, multiple: true
+
+  = form.submit

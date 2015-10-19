@@ -1,0 +1,20 @@
+h1 A flat
+
+p = @flat.title
+p = @flat.address_line_1
+p = @flat.address_line_2
+p = @flat.zip_code
+p = @flat.city
+p = @flat.country
+p = @flat.rooms_number
+p = @flat.bed_number
+p = @flat.bathroom_number
+p = @flat.people_number
+p = @flat.smoker
+p = @flat.television
+p = @flat.internet
+p = @flat.kind
+p = @flat.price
+
+- @flat.flat_pictures.each do |picture|
+  = image_tag(picture.small.url)

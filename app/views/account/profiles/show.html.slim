@@ -1,0 +1,10 @@
+h1 Show profile
+
+p = @profile.first_name || 'n/a'
+p = @profile.last_name || 'n/a'
+p = @profile.description || 'n/a'
+
+= image_tag(@profile.profile_picture.avatar.url)
+
+- if current_user.profile == @profile
+  p = link_to 'Edit', edit_account_profile_path
