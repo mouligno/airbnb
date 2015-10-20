@@ -4,4 +4,7 @@ class BookingRequest < ActiveRecord::Base
   has_one :owner, through: :flat
 
   validates_presence_of :flat, :requester, :description
+
+  validates :status, inclusion: %w(pending accepted rejected)
+
 end
