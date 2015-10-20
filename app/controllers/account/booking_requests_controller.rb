@@ -10,6 +10,7 @@ module Account
 
       if @booking_request.valid?
         flash[:notice] = "The booking request has been #{params[:booking_request][:status]}"
+        BookingRequestMailer.notify_requester(@booking_request).deliver_now
         @booking_request.save
       else
         flash[:alert] = "An error occured, please try again."
