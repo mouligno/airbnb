@@ -1,6 +1,10 @@
 class FlatsController < ApplicationController
   def index
-    @flats = Flat.all
+    if params[:search]
+      @flats = Flat.where("lower(city) LIKE ?", "%#{params[:search].downcase}%")
+    else
+      @flats = Flat.all
+    end
   end
 
   def show

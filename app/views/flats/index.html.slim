@@ -1,5 +1,10 @@
 h1 List of flats
 
+= form_tag(flats_path, :method => "get") do
+  = text_field_tag :search, params[:search], placeholder: "Where do you want to go?"
+  button type="submit" Search
+
+
 - @flats.each do |flat|
   .col-md-4
     = link_to flat_path(flat)
