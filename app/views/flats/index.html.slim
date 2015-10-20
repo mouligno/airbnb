@@ -8,4 +8,4 @@ h1 List of flats
       - else
         = image_tag('placeholder.jpg', class: 'img-responsive')
       p = flat.title
-      p = flat.price
+      p => number_to_currency(flat.price)
