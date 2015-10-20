@@ -5,5 +5,16 @@ h1 List of booking requests
   p = booking_request.requester.profile.first_name
   p = booking_request.requester.profile.last_name
   p = booking_request.description
+
+  - if booking_request.status == 'pending'
+    = form_for booking_request, url: account_booking_request_path(booking_request.id), method: :patch do |form|
+      = form.hidden_field :status, value: 'accepted'
+      = form.submit 'Accept'
+
+    = form_for booking_request, url: account_booking_request_path(booking_request.id), method: :patch do |form|
+      = form.hidden_field :status, value: 'rejected'
+      = form.submit 'Reject'
+  - else
+    h3 = booking_request.status
   hr
 
