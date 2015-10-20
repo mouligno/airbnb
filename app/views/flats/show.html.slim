@@ -14,7 +14,7 @@ p = @flat.smoker
 p = @flat.television
 p = @flat.internet
 p = @flat.kind
-p = @flat.price
+p = number_to_currency(@flat.price)
 
 - @flat.flat_pictures.each do |picture|
   = image_tag(picture.small.url)

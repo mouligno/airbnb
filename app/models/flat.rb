@@ -9,6 +9,7 @@ class Flat < ActiveRecord::Base
                         :country,
                         :kind,
                         :people_number,
+                        :price,
                         :rooms_number,
                         :title,
                         :zip_code
