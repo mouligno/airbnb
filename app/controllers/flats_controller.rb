@@ -7,8 +7,9 @@ class FlatsController < ApplicationController
     end
 
     @markers = Gmaps4rails.build_markers(@flats) do |flat, marker|
-      marker.lat flat.latitude
-      marker.lng flat.longitude
+      marker.lat        flat.latitude
+      marker.lng        flat.longitude
+      marker.infowindow render_to_string(partial: 'map_flat_box', locals: {flat: flat})
     end
   end
 
