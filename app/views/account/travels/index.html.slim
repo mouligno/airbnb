@@ -1,9 +1,20 @@
-h1 List of my travels
+.banner.text-center style="background-image: url('https://unsplash.it/1000/500')"
+  .banner-gradient
+  .banner-content
+    h1 List of my travels
 
-- @travels.each do |travel|
-  p = travel.flat.title
-  p = travel.description
+.container.padded
+  .row
+    .col-md-12
+      - if @travels.any?
+        .list-group
+          - @travels.each do |travel|
+            a.list-group-item href="#"
+              h4.list-group-item-heading
+                = travel.flat.title
+                span.label.label-default = travel.status
+              p.list-group-item-text = travel.description
 
-  h3 = travel.status
-  hr
-
+      - else
+        p You don't have any travels.
+        = link_to 'Book a flat', root_path, class: 'btn btn-primary'

@@ -11,10 +11,9 @@ class BookingRequestsController < ApplicationController
     @booking_request = @flat.booking_requests.build(requester: current_user)
     @booking_request.update(booking_request_params)
 
-    if @booking_request.valid?
+    if @booking_request.save
       flash[:notice] = "Booking request successfully created."
-      @booking_request.save
-      redirect_to root_path
+      redirect_to account_travels_path
     else
       flash[:alert] = "A problem occured saving your request."
       render :new

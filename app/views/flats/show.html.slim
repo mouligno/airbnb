@@ -1,23 +1,49 @@
-h1 A flat
+.container
+  .row
+    .col-md-12
+      h1 = @flat.title
 
-p = @flat.title
-p = @flat.address_line_1
-p = @flat.address_line_2
-p = @flat.zip_code
-p = @flat.city
-p = @flat.country
-p = @flat.rooms_number
-p = @flat.bed_number
-p = @flat.bathroom_number
-p = @flat.people_number
-p = @flat.smoker
-p = @flat.television
-p = @flat.internet
-p = @flat.kind
-p = number_to_currency(@flat.price)
+  .row
+    .col-md-8
+      - if @flat.flat_pictures.any?
+        .row
+          - @flat.flat_pictures.each do |picture|
+            .col-md-4
+              = image_tag(picture.small.url)
 
-- @flat.flat_pictures.each do |picture|
-  = image_tag(picture.small.url)
+      h2 Flat informations
+      p
+        'Kind of flat :
+        => @flat.kind
+      p
+        'Number of people :
+        = @flat.people_number
+      p
+        'Number of rooms :
+        => @flat.rooms_number
+      p
+        'Number of beds :
+        = @flat.bed_number
+      p
+        'Number of bathrooms :
+        = @flat.bathroom_number
 
-hr
-= link_to 'Booking request', new_flat_booking_request_path(@flat)
+      h2 Flat options
+      p
+        'Smoking allowed :
+        = @flat.smoker
+      p
+        'Television :
+        = @flat.television
+      p
+        'Internet :
+        = @flat.internet
+
+    .col-md-4
+      label Price per night
+      h3 = number_to_currency(@flat.price)
+      = link_to 'Book request', new_flat_booking_request_path(@flat), class: 'btn btn-primary btn-lg'
+
+      h3 Flat location
+      p = @flat.city
+      p = @flat.country

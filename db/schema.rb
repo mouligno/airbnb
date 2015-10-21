@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151020125139) do
+ActiveRecord::Schema.define(version: 20151021085832) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,8 @@ ActiveRecord::Schema.define(version: 20151020125139) do
     t.datetime "updated_at",      null: false
     t.json     "flat_pictures"
     t.float    "price"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   add_index "flats", ["owner_id"], name: "index_flats_on_owner_id", using: :btree

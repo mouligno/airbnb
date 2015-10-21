@@ -1,20 +1,33 @@
-h1 List of booking requests
+.banner.text-center style="background-image: url('https://unsplash.it/1000/500')"
+  .banner-gradient
+  .banner-content
+    h1 List of booking requests
 
-- @booking_requests.each do |booking_request|
-  p = booking_request.flat.title
-  p = booking_request.requester.profile.first_name.empty? ? 'N/A' : booking_request.requester.profile.first_name
-  p = booking_request.requester.profile.last_name.empty? ? 'N/A' : booking_request.requester.profile.last_name
-  p = booking_request.description
+.container.padded
+  .row
+    .col-md-12
+      - if @booking_requests.any?
+        .list-group
+          - @booking_requests.each do |booking_request|
+            a.list-group-item href="#"
+              h4.list-group-item-heading
+                = booking_request.flat.title
+                span.label.label-default = booking_request.status
+              p
+                'Requester :
+                => booking_request.requester.profile.first_name.presence || 'N/A'
+                => booking_request.requester.profile.last_name.presence || 'N/A'
+              p.list-group-item-text = booking_request.description
+              - if booking_request.status == 'pending'
+                .row
+                  .col-md-6
+                    = form_for booking_request, url: account_booking_request_path(booking_request.id), method: :patch do |form|
+                      = form.hidden_field :status, value: 'accepted'
+                      = form.submit 'Accept', class: 'btn btn-block btn-primary'
+                  .col-md-6
+                    = form_for booking_request, url: account_booking_request_path(booking_request.id), method: :patch do |form|
+                      = form.hidden_field :status, value: 'rejected'
+                      = form.submit 'Reject', class: 'btn btn-block btn-danger'
 
-  - if booking_request.status == 'pending'
-    = form_for booking_request, url: account_booking_request_path(booking_request.id), method: :patch do |form|
-      = form.hidden_field :status, value: 'accepted'
-      = form.submit 'Accept'
-
-    = form_for booking_request, url: account_booking_request_path(booking_request.id), method: :patch do |form|
-      = form.hidden_field :status, value: 'rejected'
-      = form.submit 'Reject'
-  - else
-    h3 = booking_request.status
-  hr
-
+      - else
+        p You don't have any booking requests for now.

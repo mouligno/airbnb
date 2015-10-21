@@ -1,0 +1,38 @@
+.banner.text-center style="background-image: url('https://unsplash.it/1000/500')"
+  .banner-gradient
+  .banner-content
+    h1 Rent your flat
+
+.container.padded
+  .row
+    .col-md-12
+      = simple_form_for @flat, url: account_flats_path do |form|
+        h2 Flat name
+        = form.input :title, label: false
+        h2 Flat localisation
+        = form.input :autocomplete_address, input_html: {id: 'user_input_autocomplete_address'}, label: false
+        = form.hidden_field :address_line_1, id: 'street_number'
+        = form.hidden_field :zip_code, id: 'postal_code'
+        = form.hidden_field :city, id: 'locality'
+        = form.hidden_field :country, id: 'country'
+        h2 Flat informations
+        = form.input :people_number
+        = form.input :rooms_number
+        = form.input :bed_number
+        = form.input :bathroom_number
+        h2 Flat options
+        = form.input :smoker
+        = form.input :television
+        = form.input :internet
+        h2 Kind of flat :
+        = form.input :kind, collection: ["Shared room", "Private room", "Full flat"], label: false
+        h2 Price :
+        = form.input :price, label: false
+        h2 Flat pictures
+        = form.file_field :flat_pictures, multiple: true
+
+        = form.submit class: 'btn btn-primary btn-lg'
+
+- content_for :javascripts
+    = javascript_include_tag "https://maps.googleapis.com/maps/api/js?libraries=places&key=#{ENV['GOOGLE_MAPS_BROWSER_KEY']}"
+    = javascript_include_tag 'autocomplete'

@@ -1,21 +1,27 @@
 module Account
   class BookingRequestsController < ApplicationController
+    before_action :set_booking_requests
+
     def index
-      @booking_requests = BookingRequest.joins(:flat).where(flats: { owner_id: current_user.id })
     end
 
     def update
-      @booking_request = BookingRequest.find(params[:id])
+      @booking_request = @booking_requests.find(params[:id])
       @booking_request.update(status: params[:booking_request][:status])
 
-      if @booking_request.valid?
+      if @booking_request.save
         flash[:notice] = "The booking request has been #{params[:booking_request][:status]}"
-        @booking_request.save
       else
         flash[:alert] = "An error occured, please try again."
       end
 
       redirect_to account_booking_requests_path
+    end
+
+    private
+
+    def set_booking_requests
+      @booking_requests = BookingRequest.joins(:flat).where(flats: { owner_id: current_user.id })
     end
   end
 end
