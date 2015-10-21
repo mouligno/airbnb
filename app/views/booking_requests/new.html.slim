@@ -1,5 +1,8 @@
-h1 New booking request
+.container
+  .row
+    .col-md-12
+      h1 New booking request
 
-= simple_form_for [@flat, @booking_request] do |form|
-  = form.input :description
-  = form.submit
+      = simple_form_for [@flat, @booking_request] do |form|
+        = form.input :description
+        = form.submit class: 'btn btn-primary'

@@ -21,6 +21,8 @@ gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'fog'
 gem 'mini_magick'
 gem 'country_select'
+gem 'geocoder'
+gem 'gmaps4rails'
 
 group :production do
   gem 'rails_12factor'

@@ -1,10 +1,21 @@
-h1 Show profile
+.banner.text-center style="background-image: url('https://unsplash.it/1000/500')"
+  .banner-gradient
+  .banner-content
+    h1 Your profile
 
-p = @profile.first_name || 'n/a'
-p = @profile.last_name || 'n/a'
-p = @profile.description || 'n/a'
+.container.padded
+  .row
+    .col-md-12
+      p
+        'First name :
+        = @profile.first_name.presence || 'n/a'
+      p
+        'Last name :
+        = @profile.last_name.presence || 'n/a'
+      p
+        'Description :
+        = @profile.description.presence || 'n/a'
 
-= image_tag(@profile.profile_picture.avatar.url)
+      = image_tag(@profile.profile_picture.avatar.url)
 
-- if current_user.profile == @profile
-  p = link_to 'Edit', edit_account_profile_path
+      p = link_to 'Edit', edit_account_profile_path, class: 'btn btn-primary'

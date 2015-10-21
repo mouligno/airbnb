@@ -1,2 +1,13 @@
-@import "bootstrap-sprockets";
-@import "bootstrap";
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
+
+@import '0.settings';
+@import '1.base';
+@import '2.layout';
+
+@import 'modules/banner';
+
+#map {
+  height: 500px;
+  width: 100%;
+}

@@ -1,9 +1,15 @@
-h1 Edit profile
+.banner.text-center style="background-image: url('https://unsplash.it/1000/500')"
+  .banner-gradient
+  .banner-content
+    h1 Edit your profile
 
-= simple_form_for(@profile, url: account_profile_path) do |form|
-  = form.input :first_name
-  = form.input :last_name
-  = form.input :description
-  = form.file_field :profile_picture
+.container.padded
+  .row
+    .col-md-12
+      = simple_form_for(@profile, url: account_profile_path) do |form|
+        = form.input :first_name
+        = form.input :last_name
+        = form.input :description
+        = form.file_field :profile_picture
 
-  = form.submit
+        = form.submit class: 'btn btn-primary'

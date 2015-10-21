@@ -1,16 +1,44 @@
-h1 List of flats
+.banner.text-center style="background-image: url('https://unsplash.it/1000/500')"
+  .banner-gradient
+  .banner-content
+    h1 Welcome to Airbnb
+    p Find places to stay.
+    = form_tag(flats_path, method: "get", class: 'form form-inline' ) do
+      .form-group
+        = text_field_tag :search, nil, placeholder: "Where do you want to go?", class: 'input-lg form-control'
+      button.btn.btn-primary type="submit" Search
 
-= form_tag(flats_path, :method => "get") do
-  = text_field_tag :search, params[:search], placeholder: "Where do you want to go?"
-  button type="submit" Search
 
+.container-fluid
+  .row.padded
+    .col-md-6
+      .row
+        - if @flats.any?
+          - @flats.each do |flat|
+            = render 'flat', flat: flat
+        - else
+          p There aren't any flats available. Please try another location.
+    .col-md-6
+      #map
 
-- @flats.each do |flat|
-  .col-md-4
-    = link_to flat_path(flat)
-      - if flat.flat_pictures.any?
-        = image_tag(flat.flat_pictures.first.small.url, class: 'img-responsive')
-      - else
-        = image_tag('placeholder.jpg', class: 'img-responsive')
-      p = flat.title
-      p => number_to_currency(flat.price)
+- content_for :javascripts
+  = javascript_include_tag "https://maps.google.com/maps/api/js?sensor=false"
+  = javascript_include_tag "https://google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js"
+
+  javascript:
+    $(document).ready(function() {
+      var mapStyle = [{"featureType":"water","elementType":"geometry","stylers":[{"color":"#e9e9e9"},{"lightness":17}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#f5f5f5"},{"lightness":20}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffffff"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#ffffff"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#ffffff"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#ffffff"},{"lightness":16}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#f5f5f5"},{"lightness":21}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#dedede"},{"lightness":21}]},{"elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#ffffff"},{"lightness":16}]},{"elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#333333"},{"lightness":40}]},{"elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#f2f2f2"},{"lightness":19}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#fefefe"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#fefefe"},{"lightness":17},{"weight":1.2}]}];
+
+      handler = Gmaps.build('Google');
+      handler.buildMap({
+        internal: { id: 'map' },
+        provider: {
+          styles: mapStyle
+        }
+        },
+        function(){
+          markers = handler.addMarkers(#{raw @markers.to_json});
+          handler.bounds.extendWith(markers);
+          handler.fitMapToBounds();
+      });
+    });

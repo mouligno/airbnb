@@ -7,9 +7,10 @@ Rails.application.routes.draw do
     resource :profile, only: %i(show edit update)
     resources :booking_requests, only: %i(index update)
     resources :travels, only: %i(index)
+    resources :flats, only: %i(new create)
   end
 
-  resources :flats, only: %i(index show new create) do
+  resources :flats, only: %i(index show) do
     resources :booking_requests, only: %i(new create)
   end
 
