@@ -9,7 +9,7 @@
         .row
           - @flat.flat_pictures.each do |picture|
             .col-md-4
-              = image_tag(picture.small.url)
+              = image_tag(picture.small.url, class: 'img-responsive')
 
       h2 Flat informations
       p
