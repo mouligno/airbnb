@@ -15,7 +15,11 @@ class BookingRequestsController < ApplicationController
       flash[:notice] = "Booking request successfully created."
       redirect_to account_travels_path
     else
-      flash[:alert] = "A problem occured saving your request."
+      if @booking_request.errors.messages[:requester]
+        flash[:alert] = "You can't book your own flat."
+      else
+        flash[:alert] = "A problem occured saving your request."
+      end
       render :new
     end
   end

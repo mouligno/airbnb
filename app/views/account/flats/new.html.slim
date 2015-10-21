@@ -25,7 +25,7 @@
         = form.input :television
         = form.input :internet
         h2 Kind of flat :
-        = form.input :kind, collection: ["Shared room", "Private room", "Full flat"], label: false
+        = form.input :kind, collection: Flat.kind.options, label: false
         h2 Price :
         = form.input :price, label: false
         h2 Flat pictures

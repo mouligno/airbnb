@@ -21,7 +21,7 @@ module Account
     private
 
     def set_booking_requests
-      @booking_requests = BookingRequest.joins(:flat).where(flats: { owner_id: current_user.id })
+      @booking_requests = current_user.guest_requests
     end
   end
 end

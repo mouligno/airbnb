@@ -1,4 +1,6 @@
 class Flat < ActiveRecord::Base
+  extend Enumerize
+
   attr_accessor :autocomplete_address
 
   belongs_to :owner, class_name: 'User', foreign_key: 'owner_id'
@@ -20,8 +22,7 @@ class Flat < ActiveRecord::Base
   validates :bed_number, numericality: true
   validates :people_number, numericality: true
 
-  # validates :kind, inclusion: { in: [:shared_room, :private_room, :all_flat] }
-  validates :kind, inclusion: { in: ["Shared room", "Private room", "Full flat"] }
+  enumerize :kind, in: [:shared_room, :private_room, :all_flat]
 
   mount_uploaders :flat_pictures, FlatPictureUploader
 
