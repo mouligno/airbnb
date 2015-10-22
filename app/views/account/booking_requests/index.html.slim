@@ -7,27 +7,23 @@
   .row
     .col-md-12
       - if @booking_requests.any?
-        .list-group
-          - @booking_requests.each do |booking_request|
-            a.list-group-item href="#"
-              h4.list-group-item-heading
-                = booking_request.flat.title
-                span.label.label-default = booking_request.status
-              p
-                'Requester :
-                => booking_request.requester.profile.first_name.presence || 'N/A'
-                => booking_request.requester.profile.last_name.presence || 'N/A'
-              p.list-group-item-text = booking_request.description
-              - if booking_request.status == 'pending'
-                .row
-                  .col-md-6
-                    = form_for booking_request, url: account_booking_request_path(booking_request.id), method: :patch do |form|
-                      = form.hidden_field :status, value: 'accepted'
-                      = form.submit 'Accept', class: 'btn btn-block btn-primary'
-                  .col-md-6
-                    = form_for booking_request, url: account_booking_request_path(booking_request.id), method: :patch do |form|
-                      = form.hidden_field :status, value: 'rejected'
-                      = form.submit 'Reject', class: 'btn btn-block btn-danger'
+        - if @booking_requests.pending.any?
+          h2 Pending booking requests
+          .list-group
+            - @booking_requests.where(status: :pending).each do |booking_request|
+              = render 'booking_request', booking_request: booking_request
+        - if @booking_requests.accepted.any?
+          h2 Accepted booking requests
+          .list-group
+            - @booking_requests.accepted.each do |booking_request|
+              = render 'booking_request', booking_request: booking_request
+
+        - if @booking_requests.rejected.any?
+          h2 Rejected booking requests
+          .list-group
+            - @booking_requests.rejected.each do |booking_request|
+              = render 'booking_request', booking_request: booking_request
+
 
       - else
         p You don't have any booking requests for now.

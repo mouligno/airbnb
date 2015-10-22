@@ -1,0 +1,29 @@
+a.list-group-item href="#"
+  h4.list-group-item-heading
+    = booking_request.flat.title
+    span.label.pull-right class="#{booking_request_css_class(booking_request)}" = booking_request.status
+  p
+    'From
+    b => booking_request.start_date.to_formatted_s(:rfc822)
+    'to
+    b => booking_request.end_date.to_formatted_s(:rfc822)
+  p
+    label Requester :
+    br
+    - if booking_request.requester.profile.profile_picture.avatar.url
+      = image_tag(booking_request.requester.profile.profile_picture.avatar.url, class: 'avatar')
+    - else
+      = image_tag('profile_placeholder.png', class: 'avatar')
+
+    => booking_request.requester.profile.first_name.presence || 'N/A'
+    => booking_request.requester.profile.last_name.presence || 'N/A'
+  p.list-group-item-text
+    label Message
+    br
+    = booking_request.description
+  - if booking_request.status == :pending
+    .row
+      .col-xs-6
+        = button_to 'Accept', account_booking_request_accept_path(booking_request), class: 'btn btn-block btn-primary'
+      .col-xs-6
+        = button_to 'Reject', account_booking_request_reject_path(booking_request), class: 'btn btn-block btn-danger'
