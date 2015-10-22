@@ -16,6 +16,9 @@
         'Description :
         = @profile.description.presence || 'n/a'
 
-      = image_tag(@profile.profile_picture.avatar.url)
+      - if @profile.profile_picture.avatar.url
+        = image_tag(@profile.profile_picture.avatar.url, class: 'avatar avatar-super-large')
+      - else
+        = image_tag('profile_placeholder.png', class: 'avatar avatar-super-large')
 
       p = link_to 'Edit', edit_account_profile_path, class: 'btn btn-primary'

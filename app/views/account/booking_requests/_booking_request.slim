@@ -12,6 +12,8 @@ a.list-group-item href="#"
     br
     - if booking_request.requester.profile.profile_picture.avatar.url
       = image_tag(booking_request.requester.profile.profile_picture.avatar.url, class: 'avatar')
+    - else
+      = image_tag('profile_placeholder.png', class: 'avatar')
 
     => booking_request.requester.profile.first_name.presence || 'N/A'
     => booking_request.requester.profile.last_name.presence || 'N/A'
