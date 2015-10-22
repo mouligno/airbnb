@@ -12,4 +12,6 @@ Rails.application.configure do
   config.log_formatter                              = ::Logger::Formatter.new
   config.log_level                                  = :debug
   config.serve_static_files                         = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  config.action_mailer.delivery_method              = :smtp
+  config.action_mailer.default_url_options          = { host: 'gentle-reef-6990.herokuapp.com' }
 end

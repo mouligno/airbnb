@@ -1,4 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "le-algorithme@mouligno-airbnb.com"
+  default from: 'antoine+airbnb@doum.it'
+
   layout 'mailer'
 end
