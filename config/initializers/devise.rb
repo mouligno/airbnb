@@ -5,7 +5,7 @@ Devise.setup do |config|
 
   config.case_insensitive_keys              = [:email]
   config.expire_all_remember_me_on_sign_out = true
-  config.mailer_sender                      = 'contact@mouligno-airbnb.com'
+  config.mailer_sender                      = 'antoine+airbnb@doum.it'
   config.password_length                    = 8..72
   config.reconfirmable                      = true
   config.reset_password_within              = 6.hours
