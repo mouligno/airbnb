@@ -40,10 +40,20 @@
         = @flat.internet
 
     .col-md-4
-      label Price per night
+      h3 Price per night
       h3 = number_to_currency(@flat.price)
       = link_to 'Book request', new_flat_booking_request_path(@flat), class: 'btn btn-primary btn-lg'
 
       h3 Flat location
       p = @flat.city
       p = @flat.country
+
+      hr
+
+      h3 Your host
+      .text-center
+        = image_tag(@flat.owner.profile.profile_picture.avatar.url, class: 'avatar avatar-super-large')
+      label
+        => @flat.owner.profile.first_name
+        => @flat.owner.profile.last_name
+      p = @flat.owner.profile.description

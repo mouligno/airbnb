@@ -12,6 +12,7 @@
         h2 Flat localisation
         = form.input :autocomplete_address, input_html: {id: 'user_input_autocomplete_address'}, label: false
         = form.hidden_field :address_line_1, id: 'street_number'
+        = form.hidden_field :address_line_2, id: 'route'
         = form.hidden_field :zip_code, id: 'postal_code'
         = form.hidden_field :city, id: 'locality'
         = form.hidden_field :country, id: 'country'

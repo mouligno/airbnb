@@ -7,13 +7,22 @@
   .row
     .col-md-12
       - if @travels.any?
-        .list-group
-          - @travels.each do |travel|
-            a.list-group-item href="#"
-              h4.list-group-item-heading
-                = travel.flat.title
-                span.label.label-default = travel.status
-              p.list-group-item-text = travel.description
+        - if @travels.pending.any?
+          h2 Pending travels
+          .list-group
+            - @travels.where(status: :pending).each do |travel|
+              = render 'travel', travel: travel
+        - if @travels.accepted.any?
+          h2 Accepted travels
+          .list-group
+            - @travels.accepted.each do |travel|
+              = render 'travel', travel: travel
+
+        - if @travels.rejected.any?
+          h2 Rejected travels
+          .list-group
+            - @travels.rejected.each do |travel|
+              = render 'travel', travel: travel
 
       - else
         p You don't have any travels.

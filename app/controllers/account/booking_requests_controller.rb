@@ -5,24 +5,10 @@ module Account
     def index
     end
 
-    def update
-      @booking_request = @booking_requests.find(params[:id])
-      @booking_request.update(status: params[:booking_request][:status])
-
-      if @booking_request.save
-        flash[:notice] = "The booking request has been #{params[:booking_request][:status]}"
-        BookingRequestMailer.notify_requester(@booking_request).deliver_now
-      else
-        flash[:alert] = "An error occured, please try again."
-      end
-
-      redirect_to account_booking_requests_path
-    end
-
-    private
+  private
 
     def set_booking_requests
-      @booking_requests = current_user.guest_requests
+      @booking_requests = current_user.guest_requests.order(start_date: :asc)
     end
   end
 end

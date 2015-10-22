@@ -1,5 +1,7 @@
 module Account
   class ProfilesController < Base
+    before_action :set_profile
+
     def show
     end
 
