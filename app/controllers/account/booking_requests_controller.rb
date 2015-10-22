@@ -1,5 +1,5 @@
 module Account
-  class BookingRequestsController < ApplicationController
+  class BookingRequestsController < Base
     before_action :set_booking_requests
 
     def index

@@ -1,5 +1,5 @@
 module Account
-  class FlatsController < ApplicationController
+  class FlatsController < Base
     def new
       @flat = current_user.flats.build
     end

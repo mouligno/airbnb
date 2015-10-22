@@ -1,7 +1,5 @@
 module Account
-  class ProfilesController < ApplicationController
-    before_action :set_profile
-
+  class ProfilesController < Base
     def show
     end
 
@@ -20,7 +18,7 @@ module Account
     end
 
     def set_profile
-      @profile = current_user.profile || current_user.build_profile
+      @profile = current_user.profile
     end
   end
 end
