@@ -15,6 +15,8 @@ require 'faker'
   )
 
   user.profile.update_attributes(remote_profile_picture_url: 'http://unsplash.it/300/300?random')
+
+  puts "User created : #{user.first_name} #{user.last_name}"
 end
 
 
@@ -43,4 +45,6 @@ end
   end
 
   flat.update_attributes(flat_pictures: Flat.find(@flat_id).flat_pictures)
+
+  puts "Flat created : #{flat.title}"
 end
