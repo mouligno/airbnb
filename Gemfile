@@ -24,6 +24,9 @@ gem 'country_select'
 gem 'geocoder'
 gem 'gmaps4rails'
 gem 'enumerize'
+gem 'kaminari'
+gem 'bootstrap-kaminari-views'
+gem 'faker'
 
 group :production do
   gem 'rails_12factor'

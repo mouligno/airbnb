@@ -12,18 +12,14 @@ class FlatPictureUploader < CarrierWave::Uploader::Base
   end
 
   version :small do
-    process resize_to_fit: [300, 10000]
+    process resize_to_fill: [300, 200]
   end
 
   version :list do
-    process resize_to_fit: [500, 10000]
+    process resize_to_fill: [500, 333]
   end
 
   version :large do
     process resize_to_fit: [700, 10000]
-  end
-
-  version :fullscreen do
-    process resize_to_fit: [1200, 10000]
   end
 end

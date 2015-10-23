@@ -1,6 +1,6 @@
 .banner.text-center style="background-image: url('https://unsplash.it/1000/500')"
   .banner-gradient
-  .banner-content
+  .banner-content.text-center
     h1 Welcome to Airbnb
     p Find places to stay.
     = form_tag(flats_path, method: "get", class: 'form form-inline' ) do
@@ -9,7 +9,7 @@
       button.btn.btn-primary type="submit" Search
 
 
-.container-fluid
+.container-fluid.
   .row.padded
     .col-md-6
       .row
@@ -18,7 +18,11 @@
             = render 'flat', flat: flat
         - else
           p There aren't any flats available. Please try another location.
-    .col-md-6
+      - if @flats.any?
+        .row.text-center
+          = paginate @flats, theme: 'twitter-bootstrap-3'
+
+    .col-md-6.hidden-xs
       #map
 
 - content_for :javascripts

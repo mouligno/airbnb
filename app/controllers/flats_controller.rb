@@ -1,9 +1,9 @@
 class FlatsController < ApplicationController
   def index
     if params[:search]
-      @flats = Flat.near("#{params[:search]}", 10)
+      @flats = Flat.near("#{params[:search]}", 10).page params[:page]
     else
-      @flats = Flat.all
+      @flats = Flat.all.page params[:page]
     end
 
     @markers = Gmaps4rails.build_markers(@flats) do |flat, marker|

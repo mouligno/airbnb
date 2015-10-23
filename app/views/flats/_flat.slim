@@ -7,6 +7,6 @@
         - if flat.flat_pictures.any?
           = image_tag(flat.flat_pictures.first.list.url, class: 'img-responsive')
         - else
-          = image_tag('http://unsplash.it/500/350', class: 'img-responsive')
+          = image_tag('http://unsplash.it/500/333?random', class: 'img-responsive')
       .panel-footer
         p => number_to_currency(flat.price)

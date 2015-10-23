@@ -1,5 +1,6 @@
 class Flat < ActiveRecord::Base
   extend Enumerize
+  paginates_per 8
 
   attr_accessor :autocomplete_address
 
