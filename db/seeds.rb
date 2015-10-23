@@ -16,7 +16,7 @@ require 'faker'
 
   user.profile.update_attributes(remote_profile_picture_url: 'http://unsplash.it/300/300?random')
 
-  puts "User created : #{user.first_name} #{user.last_name}"
+  puts "User created : #{user.profile.first_name} #{user.profile.last_name}"
 end
 
 
