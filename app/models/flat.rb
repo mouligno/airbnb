@@ -6,6 +6,7 @@ class Flat < ActiveRecord::Base
 
   belongs_to :owner, class_name: 'User', foreign_key: 'owner_id'
   has_many :booking_requests, dependent: :destroy
+  has_many :reviews, dependent: :destroy
 
   validates_presence_of :address_line_1,
                         :bathroom_number,

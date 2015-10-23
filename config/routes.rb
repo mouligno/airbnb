@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   resources :flats, only: %i(index show) do
     resources :booking_requests, only: %i(new create)
+    resources :reviews, only: %i(create)
   end
 
 end

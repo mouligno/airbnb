@@ -34,13 +34,28 @@
           h2 Flat options
           p
             'Smoking allowed :
-            = @flat.smoker
+            = @flat.smoker ? 'Yes' : 'No'
           p
             'Television :
-            = @flat.television
+            = @flat.television ? 'Yes' : 'No'
           p
             'Internet :
-            = @flat.internet
+            = @flat.internet ? 'Yes' : 'No'
+      hr
+      .row
+        .col-md-12
+          h2 Reviews
+          - if @flat.reviews.any?
+            - @flat.reviews.each do |review|
+              = render 'review', review: review
+          - else
+            p Be the first to say what you think ;-)
+        .col-md-12
+          h3 What did you think ?
+          = simple_form_for [@flat, @review], html: { class: 'form' } do |f|
+            = f.input :content
+            = f.input :rating, collection: 0..5
+            = f.button :submit, class: 'btn btn-primary'
 
     .col-md-4
       h3 Your host

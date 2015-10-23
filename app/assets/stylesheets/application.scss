@@ -1,5 +1,7 @@
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
+@import "font-awesome-sprockets";
+@import "font-awesome";
 
 @import '0.settings';
 @import '1.base';
@@ -9,3 +11,4 @@
 @import 'modules/avatar';
 @import 'modules/badge';
 @import 'modules/flat';
+@import 'modules/post';

@@ -1,0 +1,20 @@
+.post
+  .post-body
+    h3
+      - i = 1
+      - 5.times
+        - if i <= review.rating
+          i.fa.fa-star.colored
+        - else
+          i.fa.fa-star.uncolored
+        - i += 1
+    p = review.content
+  .post-controls.text-right
+    - if review.user.profile.profile_picture.avatar.url
+      = image_tag(review.user.profile.profile_picture.avatar.url, class: 'avatar')
+    - else
+      = image_tag('profile_placeholder.png', class: 'avatar avatar-super-large')
+    p
+      => review.user.profile.first_name
+      => review.user.profile.last_name
+
