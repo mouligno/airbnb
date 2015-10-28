@@ -1,14 +1,17 @@
 module Account
   class FlatsController < Base
     def new
-      @flat = current_user.flats.build
+      # @flat = current_user.flats.build
+      @flat = Flat.new
+      @flat.owner = current_user
+      @flat.flat_pictures.build
     end
 
     def create
-      @flat = current_user.flats.build(flat_params)
+      @flat = Flat.new(flat_params)
+      @flat.owner = current_user
 
-      if @flat.valid?
-        @flat.save
+      if @flat.save
         flash[:notice] = 'Flat successfully saved.'
         redirect_to flat_path(@flat)
       else
@@ -34,7 +37,7 @@ module Account
                                   :television,
                                   :internet,
                                   :kind,
-                                  {flat_pictures: []})
+                                  flat_pictures_attributes: [:id, :image, :_destroy])
     end
   end
 end
