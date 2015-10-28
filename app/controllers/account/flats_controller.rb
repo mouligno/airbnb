@@ -1,7 +1,6 @@
 module Account
   class FlatsController < Base
     def new
-      # @flat = current_user.flats.build
       @flat = Flat.new
       @flat.owner = current_user
       @flat.flat_pictures.build
