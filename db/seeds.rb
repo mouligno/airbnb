@@ -1,5 +1,19 @@
 require 'faker'
 
+if Rails.env.development?
+  Profile.destroy_all
+  User.destroy_all
+  Flat.destroy_all
+
+  admin = User.new(
+    email: 'antoine@doum.it',
+    password: 'kikoolol',
+    admin: true )
+  admin.skip_confirmation!
+  admin.save!
+  admin.confirm
+end
+
 10.times do
   user = User.new(
     email: Faker::Internet.email,
@@ -37,14 +51,13 @@ end
     latitude:         Faker::Address.latitude,
     longitude:        Faker::Address.longitude
   )
+  flat.save
 
-  if Rails.env.development?
-    @flat_id = 13
-  else
-    @flat_id = [10, 8, 9, 7, 6].sample(1).first
+  4.times do
+    flat_picture = flat.flat_pictures.build
+    flat_picture.update_attributes(remote_image_url: 'http://unsplash.it/800?random')
+    flat_picture.save
   end
-
-  flat.update_attributes(flat_pictures: Flat.find(@flat_id).flat_pictures)
 
   puts "Flat created : #{flat.title}"
 end

@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: booking_requests
+#
+#  id           :integer          not null, primary key
+#  flat_id      :integer
+#  requester_id :integer
+#  description  :text
+#  status       :string           default("pending")
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  start_date   :date
+#  end_date     :date
+#
+
 class BookingRequest < ActiveRecord::Base
   extend Enumerize
 
@@ -14,7 +29,8 @@ class BookingRequest < ActiveRecord::Base
             :start_date_cannot_be_in_the_past,
             :end_date_cannot_be_before_start_date,
             :start_date_cannot_be_in_an_accepted_booking_request_period,
-            :end_date_cannot_be_in_an_accepted_booking_request_period
+            :end_date_cannot_be_in_an_accepted_booking_request_period,
+            :period_cannot_be_in_over_an_accepted_booking_request_period
 
   enumerize :status, in: [:pending, :accepted, :rejected], default: :pending
 
@@ -58,6 +74,16 @@ private
       flat_booking_requests.each do |booking|
         errors.add(:period, "already booked") if
           end_date.between?(booking.start_date - 1, booking.end_date)
+      end
+    end
+  end
+
+  def period_cannot_be_in_over_an_accepted_booking_request_period
+    if ['pending', 'accepted'].include?(status)
+      flat_booking_requests = Flat.find(self.flat).booking_requests.accepted
+      flat_booking_requests.each do |booking|
+        errors.add(:period, "already booked") if
+          start_date < booking.start_date && end_date > booking.end_date
       end
     end
   end

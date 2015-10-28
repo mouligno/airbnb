@@ -12,8 +12,8 @@
 #  profile_picture :string
 #
 
-class Profile < ActiveRecord::Base
-  belongs_to :user
+require 'rails_helper'
 
-  mount_uploader :profile_picture, ProfilePictureUploader
+describe Profile do
+  it { is_expected.to belong_to(:user) }
 end

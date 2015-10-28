@@ -9,7 +9,7 @@
         .row.flat-pictures
           - @flat.flat_pictures.each do |picture|
             .col-md-6.flat-pictures-item
-              = image_tag(picture.list.url, class: 'img-responsive')
+              = image_tag(picture.image.list.url, class: 'img-responsive')
 
       .row
         .col-md-6

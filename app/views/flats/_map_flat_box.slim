@@ -1,6 +1,6 @@
 h4 = flat.title
 - if flat.flat_pictures.any?
-  = image_tag(flat.flat_pictures.first.small.url, class: 'img-responsive')
+  = image_tag(flat.flat_pictures.first.image.small.url, class: 'img-responsive')
 - else
   = image_tag('http://unsplash.it/300/200', class: 'img-responsive')
 p => number_to_currency(flat.price)

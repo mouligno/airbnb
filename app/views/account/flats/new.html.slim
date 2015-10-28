@@ -29,10 +29,16 @@
         = form.input :kind, collection: Flat.kind.options, label: false
         h2 Price :
         = form.input :price, label: false
-        h2 Flat pictures
-        = form.file_field :flat_pictures, multiple: true
-
-        = form.submit class: 'btn btn-primary btn-lg'
+        h2 Add your flat pictures :
+        .row
+            = form.simple_fields_for :flat_pictures do |flat_picture|
+                = render 'flat_picture_fields', f: flat_picture
+            .col-md-4.links
+                = link_to_add_association 'Add a flat picture', form, :flat_pictures, class: 'btn btn-primary btn-sm'
+        hr
+        .row
+            .col-md-12
+                = form.submit class: 'btn btn-primary btn-lg'
 
 - content_for :javascripts
     = javascript_include_tag "https://maps.googleapis.com/maps/api/js?libraries=places&key=#{ENV['GOOGLE_MAPS_BROWSER_KEY']}"

@@ -12,8 +12,12 @@
 #  profile_picture :string
 #
 
-class Profile < ActiveRecord::Base
-  belongs_to :user
+FactoryGirl.define do
+  factory :profile do
+    first_name  { Forgery::Name.first_name }
+    last_name   { Forgery::Name.last_name }
+    description { Forgery::LoremIpsum.paragraph }
 
-  mount_uploader :profile_picture, ProfilePictureUploader
+    association :user
+  end
 end

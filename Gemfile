@@ -27,6 +27,9 @@ gem 'enumerize'
 gem 'kaminari'
 gem 'bootstrap-kaminari-views'
 gem 'faker'
+gem 'annotate'
+gem 'activeadmin', github: 'activeadmin'
+gem 'cocoon'
 
 group :production do
   gem 'rails_12factor'
@@ -35,6 +38,12 @@ end
 
 group :development, :test do
   gem 'byebug'
+  gem 'rspec-rails'
+  gem 'shoulda-matchers'
+  gem 'factory_girl_rails'
+  gem 'forgery'
+  gem 'simplecov'
+  gem "letter_opener"
 end
 
 group :development do
@@ -42,6 +51,5 @@ group :development do
   gem 'spring'
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem "letter_opener"
 end
 
