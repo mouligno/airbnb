@@ -3,5 +3,9 @@ module Account
     def index
       @travels = current_user.booking_requests.order(start_date: :asc)
     end
+
+    def show
+      @travel = current_user.booking_requests.find(params[:id])
+    end
   end
 end

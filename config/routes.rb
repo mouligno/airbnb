@@ -10,7 +10,10 @@ Rails.application.routes.draw do
       resource :accept, only: :create, controller: 'booking_requests/accept'
       resource :reject, only: :create, controller: 'booking_requests/reject'
     end
-    resources :travels, only: %i(index)
+    resources :travels, only: %i(index show) do
+      resource :payment, only: :create, controller: 'travels/payment'
+      resource :cancel, only: :create, controller: 'travels/cancel'
+    end
     resources :flats, only: %i(new create)
   end
 

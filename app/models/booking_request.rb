@@ -28,18 +28,21 @@ class BookingRequest < ActiveRecord::Base
   validate  :requester_cannot_be_flat_owner,
             :start_date_cannot_be_in_the_past,
             :end_date_cannot_be_before_start_date,
-            :start_date_cannot_be_in_an_accepted_booking_request_period,
-            :end_date_cannot_be_in_an_accepted_booking_request_period,
-            :period_cannot_be_in_over_an_accepted_booking_request_period
+            :start_date_cannot_be_in_an_booked_booking_request_period,
+            :end_date_cannot_be_in_an_booked_booking_request_period,
+            :period_cannot_be_in_over_an_booked_booking_request_period
 
-  enumerize :status, in: [:pending, :accepted, :rejected], default: :pending
+  enumerize :status, in: [:pending, :accepted, :rejected, :completed, :canceled], default: :pending
 
   scope :incoming_for, ->(user) { BookingRequest.joins(:flat).where(flats: { owner_id: user.id }) }
 
   scope :pending, -> { where(status: :pending) }
   scope :accepted, -> { where(status: :accepted) }
+  scope :completed, -> { where(status: :completed) }
   scope :rejected, -> { where(status: :rejected) }
+  scope :canceled, -> { where(status: :canceled) }
 
+  scope :booked, -> {where(status: [:accepted, :completed])}
 private
 
   def requester_cannot_be_flat_owner
@@ -58,30 +61,33 @@ private
       !end_date.blank? and end_date <= start_date
   end
 
-  def start_date_cannot_be_in_an_accepted_booking_request_period
-    if ['pending', 'accepted'].include?(status)
-      flat_booking_requests = Flat.find(self.flat).booking_requests.accepted
+  def start_date_cannot_be_in_an_booked_booking_request_period
+    if ['pending', 'accepted', 'completed'].include?(status)
+      flat_booking_requests = Flat.find(self.flat).booking_requests.booked
       flat_booking_requests.each do |booking|
+        next if booking == self
         errors.add(:period, "already booked") if
           start_date.between?(booking.start_date, booking.end_date - 1)
       end
     end
   end
 
-  def end_date_cannot_be_in_an_accepted_booking_request_period
-    if ['pending', 'accepted'].include?(status)
-      flat_booking_requests = Flat.find(self.flat).booking_requests.accepted
+  def end_date_cannot_be_in_an_booked_booking_request_period
+    if ['pending', 'accepted', 'completed'].include?(status)
+      flat_booking_requests = Flat.find(self.flat).booking_requests.booked
       flat_booking_requests.each do |booking|
+        next if booking == self
         errors.add(:period, "already booked") if
           end_date.between?(booking.start_date - 1, booking.end_date)
       end
     end
   end
 
-  def period_cannot_be_in_over_an_accepted_booking_request_period
-    if ['pending', 'accepted'].include?(status)
-      flat_booking_requests = Flat.find(self.flat).booking_requests.accepted
+  def period_cannot_be_in_over_an_booked_booking_request_period
+    if ['pending', 'accepted', 'completed'].include?(status)
+      flat_booking_requests = Flat.find(self.flat).booking_requests.booked
       flat_booking_requests.each do |booking|
+        next if booking == self
         errors.add(:period, "already booked") if
           start_date < booking.start_date && end_date > booking.end_date
       end
