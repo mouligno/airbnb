@@ -14,7 +14,7 @@ class BookingRequestsController < ApplicationController
 
     if @booking_request.save
       flash[:notice] = "Booking request successfully created."
-      BookingRequestMailer.notify_owner(@booking_request).deliver_now
+      BookingRequestMailer.notify_owner(@booking_request).deliver_later
 
       redirect_to account_travels_path
     else

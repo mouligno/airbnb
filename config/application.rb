@@ -14,6 +14,7 @@ Bundler.require(*Rails.groups)
 
 module Airbnb
   class Application < Rails::Application
+    config.active_job.queue_adapter                       = :sidekiq
     config.active_record.raise_in_transactional_callbacks = true
     config.assets.initialize_on_precompile                = false
   end

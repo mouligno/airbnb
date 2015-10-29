@@ -30,6 +30,9 @@ gem 'faker'
 gem 'annotate'
 gem 'activeadmin', github: 'activeadmin'
 gem 'cocoon'
+gem 'sidekiq'
+gem 'sinatra'
+gem 'sidekiq-failures'
 
 group :production do
   gem 'rails_12factor'
