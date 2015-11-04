@@ -1,7 +1,7 @@
-a.list-group-item href="#"
+= link_to account_travel_path(travel), class: 'list-group-item'
   h4.list-group-item-heading
     = travel.flat.title
-    span.label.pull-right class="#{booking_request_css_class(travel)}" = travel.status
+    span.label.pull-right class="#{booking_css_class(travel)}" = travel.status
   p
     'From
     b => travel.start_date.to_formatted_s(:rfc822)

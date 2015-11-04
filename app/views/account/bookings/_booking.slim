@@ -1,0 +1,29 @@
+a.list-group-item href="#"
+  h4.list-group-item-heading
+    = booking.flat.title
+    span.label.pull-right class="#{booking_css_class(booking)}" = booking.status
+  p
+    'From
+    b => booking.start_date.to_formatted_s(:rfc822)
+    'to
+    b => booking.end_date.to_formatted_s(:rfc822)
+  p
+    label Requester :
+    br
+    - if booking.requester.profile.profile_picture.avatar.url
+      = image_tag(booking.requester.profile.profile_picture.avatar.url, class: 'avatar')
+    - else
+      = image_tag('profile_placeholder.png', class: 'avatar')
+
+    => booking.requester.profile.first_name.presence || 'N/A'
+    => booking.requester.profile.last_name.presence || 'N/A'
+  p.list-group-item-text
+    label Message
+    br
+    = booking.description
+  - if booking.pending?
+    .row
+      .col-xs-6
+        = button_to 'Accept', account_booking_accept_path(booking), class: 'btn btn-block btn-primary'
+      .col-xs-6
+        = button_to 'Reject', account_booking_reject_path(booking), class: 'btn btn-block btn-danger'

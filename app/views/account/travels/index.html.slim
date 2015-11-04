@@ -7,10 +7,15 @@
   .row
     .col-md-12
       - if @travels.any?
+        - if @travels.completed.any?
+          h2 Completed travels
+          .list-group
+            - @travels.completed.each do |travel|
+              = render 'travel', travel: travel
         - if @travels.pending.any?
           h2 Pending travels
           .list-group
-            - @travels.where(status: :pending).each do |travel|
+            - @travels.pending.each do |travel|
               = render 'travel', travel: travel
         - if @travels.accepted.any?
           h2 Accepted travels
@@ -22,6 +27,12 @@
           h2 Rejected travels
           .list-group
             - @travels.rejected.each do |travel|
+              = render 'travel', travel: travel
+
+        - if @travels.canceled.any?
+          h2 canceled travels
+          .list-group
+            - @travels.canceled.each do |travel|
               = render 'travel', travel: travel
 
       - else

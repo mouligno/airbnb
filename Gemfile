@@ -33,6 +33,7 @@ gem 'cocoon'
 gem 'sidekiq'
 gem 'sinatra'
 gem 'sidekiq-failures'
+gem 'aasm'
 
 group :production do
   gem 'rails_12factor'

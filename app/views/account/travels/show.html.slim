@@ -1,0 +1,21 @@
+.banner.text-center style="background-image: url('https://unsplash.it/1000/500')"
+  .banner-gradient
+  .banner-content
+    h1 My travel
+
+.container.padded
+  .row
+    .col-md-12
+      h4 = @travel.flat.title
+        span.label.pull-right class="#{booking_css_class(travel)}" = @travel.status
+      p
+        'From
+        b => @travel.start_date.to_formatted_s(:rfc822)
+        'to
+        b => @travel.end_date.to_formatted_s(:rfc822)
+      p = @travel.description
+
+    - if @travel.accepted?
+      = button_to 'Pay', account_travel_payment_path(@travel), class: 'btn btn-lg btn-primary'
+      -
+      = button_to 'Cancel', account_travel_cancel_path(@travel), class: 'btn btn-lg btn-default'
