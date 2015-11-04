@@ -1,17 +1,18 @@
 module Account
-  module BookingRequests
+  module Bookings
     class RejectController < Account::Base
       def create
-        @booking_request = current_user.guest_requests.find(params[:booking_request_id])
-        @booking_request.status = :rejected
+        @booking = current_user.guest_requests.find(params[:booking_id])
 
-        if @booking_request.save
+        if @booking.may_reject?
           flash[:notice] = "Booking request rejected."
+          @booking.reject!
         else
+          raise
           flash[:alert] = "An error occured, please try again."
         end
 
-        redirect_to account_booking_requests_path
+        redirect_to account_bookings_path
       end
     end
   end

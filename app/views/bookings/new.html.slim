@@ -1,9 +1,9 @@
 .container
   .row
     .col-md-12
-      h1 New booking request
+      h1 New booking
 
-      = simple_form_for [@flat, @booking_request] do |form|
+      = simple_form_for [@flat, @booking] do |form|
         = form.input :start_date
         = form.input :end_date
         = form.input :description

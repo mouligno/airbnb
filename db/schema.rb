@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151028121220) do
+ActiveRecord::Schema.define(version: 20151030134550) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,19 +31,19 @@ ActiveRecord::Schema.define(version: 20151028121220) do
   add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
   add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
 
-  create_table "booking_requests", force: :cascade do |t|
+  create_table "bookings", force: :cascade do |t|
     t.integer  "flat_id"
     t.integer  "requester_id"
     t.text     "description"
-    t.string   "status",       default: "pending"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.date     "start_date"
     t.date     "end_date"
+    t.string   "status"
   end
 
-  add_index "booking_requests", ["flat_id"], name: "index_booking_requests_on_flat_id", using: :btree
-  add_index "booking_requests", ["requester_id"], name: "index_booking_requests_on_requester_id", using: :btree
+  add_index "bookings", ["flat_id"], name: "index_bookings_on_flat_id", using: :btree
+  add_index "bookings", ["requester_id"], name: "index_bookings_on_requester_id", using: :btree
 
   create_table "flat_pictures", force: :cascade do |t|
     t.integer  "flat_id"
@@ -126,8 +126,8 @@ ActiveRecord::Schema.define(version: 20151028121220) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "booking_requests", "flats"
-  add_foreign_key "booking_requests", "users", column: "requester_id"
+  add_foreign_key "bookings", "flats"
+  add_foreign_key "bookings", "users", column: "requester_id"
   add_foreign_key "flat_pictures", "flats"
   add_foreign_key "flats", "users", column: "owner_id"
   add_foreign_key "profiles", "users"

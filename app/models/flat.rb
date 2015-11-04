@@ -33,7 +33,7 @@ class Flat < ActiveRecord::Base
   attr_accessor :autocomplete_address
 
   belongs_to :owner, class_name: 'User', foreign_key: 'owner_id'
-  has_many :booking_requests, dependent: :destroy
+  has_many :bookings, dependent: :destroy
   has_many :reviews, dependent: :destroy
 
   has_many :flat_pictures, inverse_of: :flat, dependent: :destroy

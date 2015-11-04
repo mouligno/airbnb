@@ -31,6 +31,6 @@ require 'rails_helper'
 
 describe Flat do
   it { is_expected.to belong_to(:owner) }
-  it { is_expected.to have_many(:booking_requests) }
+  it { is_expected.to have_many(:bookings) }
   it { is_expected.to have_many(:reviews) }
 end

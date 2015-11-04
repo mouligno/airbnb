@@ -14,7 +14,7 @@
 #
 
 FactoryGirl.define do
-  factory :booking_request do
+  factory :booking do
     flat
     association :requester, factory: :user
 

@@ -1,4 +1,4 @@
-ActiveAdmin.register BookingRequest do
+ActiveAdmin.register Booking do
   permit_params :id,
                 :flat_id,
                 :requester_id,

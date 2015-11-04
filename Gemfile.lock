@@ -30,6 +30,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     CFPropertyList (2.3.1)
+    aasm (4.2.0)
     actionmailer (4.2.4)
       actionpack (= 4.2.4)
       actionview (= 4.2.4)
@@ -280,8 +281,6 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
-    mangopay (3.0.19)
-      multi_json (>= 1.7.7)
     mime-types (2.6.2)
     mini_magick (4.2.10)
     mini_portile (0.6.2)
@@ -409,6 +408,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aasm
   activeadmin!
   annotate
   better_errors
@@ -436,7 +436,6 @@ DEPENDENCIES
   jquery-turbolinks
   kaminari
   letter_opener
-  mangopay
   mini_magick
   pg
   puma

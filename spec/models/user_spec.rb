@@ -28,7 +28,7 @@ describe User do
   it { is_expected.to validate_presence_of :email }
   it { is_expected.to have_one :profile }
   it { is_expected.to have_many :flats }
-  it { is_expected.to have_many :booking_requests }
+  it { is_expected.to have_many :bookings }
   it { is_expected.to have_many :guest_requests }
   it { is_expected.to have_many :reviews }
 end
